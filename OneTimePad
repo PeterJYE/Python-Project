@@ -1,0 +1,30 @@
+import random
+# The KeyGerator generate a key that has length of the plaintext. The encrypt xor the plaintext and the key to generate
+#a Encrypted text.The decrpt genereates the xor of ciphertext and the key. The last while loop allow the use of 3 methods
+def KeyGenerator(length):
+    result=[]
+    for i in range(length):
+        case = random.choice([65, 97])
+        result.append(chr(random.randint(case, case + 25)))
+    return ''.join(result)
+def encrypt(text, key):
+    result = ""
+    for i in range(len(text)):
+        result += chr(ord(text[i])^ord(key[i]))
+    return result
+
+def decrypt(ciphertext, key):
+    result = ""
+    for i in range(len(ciphertext)):
+        result += chr(ord(ciphertext[i])^ord(key[i]))
+    return result
+while (True):
+    plaintext = input("Type your English text here: ")
+    key = KeyGenerator(len(plaintext))
+    print("Key:", key)
+
+    encrypted_text = encrypt(plaintext, key)
+    print("Encrypted Text:", encrypted_text)
+
+    decrypted_text = decrypt(encrypted_text, key)
+    print("Decrypted Text:", decrypted_text)

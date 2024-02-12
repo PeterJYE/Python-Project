@@ -1,0 +1,40 @@
+#This is a random shift cipher method
+
+import random
+# The encrypt method has two inputs: one is the plaintext(text) and one is the number of alpha that will be shifted(k).
+#The loop in the encrypt go over every char in text and shift every alphabet to k to the right
+
+def encrypt(text, k):
+    result = ""
+    for i in text:
+        if i.isalpha():
+            if i.isupper():
+                result += chr((ord(i) + k - ord('A')) % 26 + ord('A'))
+            else:
+                result += chr((ord(i) + k - ord('a')) % 26 + ord('a'))
+        else:
+            result += i
+    return result
+# The decrypt method has two inputs: one is the plaintext(text) and one is the number of alpha that will be shifted(k).
+#The loop in the decrypt go over every char in text and shift every alphabet k posion back
+def decrypt(text, shift):
+    result = ""
+    for i in text:
+        if i.isalpha():
+            if i.isupper():
+                result += chr(((ord(i) - ord('A') - shift) % 26) + ord('A'))
+            else:
+                result += chr(((ord(i) - ord('a') - shift) % 26) + ord('a'))
+        else:
+            result += i
+    return result
+# The final while loop input the plaintext and print the value of k, Encrypted Text, and Decrypted Text
+while(True):
+    plaintext = input("Type your English text here: ")
+    k = random.randint(1, 25)
+    print("Value of k: ", k)
+    encrypted_text = encrypt(plaintext, k)
+    print("Encrypted Text:", encrypted_text)
+
+    decrypted_text = decrypt(encrypted_text, k)
+    print("Decrypted Text:", decrypted_text)
